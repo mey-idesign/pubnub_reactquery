@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState } from "react";
+import ChatComponent from "./ChatComponent";
+
+const SelectUser = ({ handleChange }) => {
+  return (
+    <div onChange={handleChange}>
+      <input type="radio" id="user1" name="users" value="User1" defaultChecked />
+      <label for="user1">User1</label>
+      <input type="radio" id="user1" name="users" value="User2" />
+      <label for="user2">User2</label>
+    </div>
+  );
+};
 
 function App() {
+  const [user, setUser] = useState("User1");
+  const handleChange = (e) => {
+    setUser(e.target.value);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SelectUser handleChange={handleChange} />
+      <ChatComponent user={user} />
+    </>
   );
 }
 
